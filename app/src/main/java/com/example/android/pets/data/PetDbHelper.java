@@ -31,6 +31,8 @@ public class PetDbHelper extends SQLiteOpenHelper {
     /** Name of the database file */
     private static final String DATABASE_NAME = "shelter.db";
 
+    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + PetEntry.TABLE_NAME;
+
     /**
      * Database version. If you change the database schema, you must increment the database version.
      */
@@ -68,5 +70,10 @@ public class PetDbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // The database is still at version 1, so there's nothing to do be done here.
+        // THi
+        // This database is only a cache
+        db.execSQL(SQL_DELETE_ENTRIES);
+        onCreate(db);
+        db.close();
     }
 }
